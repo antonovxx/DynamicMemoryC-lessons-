@@ -1,43 +1,271 @@
 #include <iostream>
+//#define ARRAYS
+#define MATRIX
+
 
 void FillRand(int* array, const int size);
+void FillRand(int** matrix, const int rows, const int cols);
 void Print(int* array, const int size);
+void Print(int** matrix, const int rows, const int cols);
+int** allocate(const int rows, const int cols);
+void clear(int** matrix, const int rows);
+
+
+int** push_row_back(int** matrix, int& rows, int cols);
+int** push_row_front(int** matrix, int& rows, int cols);
+int** insert_rows(int** matrix, int& rows, int cols, int index);
+int** pop_row_back(int** matrix, int& rows, int cols);
+int** pop_row_front(int** matrix, int& rows, int cols);
+int** erase_row(int** matrix, int& rows, int cols, int index);
+void push_col_back(int** matrix, int rows, int& cols);
+void pop_col_back(int** matrix, int rows, int& cols);
+
+
+
 void Push_back(int* array, int& size, int value);
 void Push_front(int*& array, int& size, int value);
 void insert(int*& array, int& size, int value, int index);
 void pop_back(int*& array, int& size);
 void pop_front(int*& array, int& size);
-void erase(int*& array, int& size, int index);
+int* erase(int* array, int& size, int index);
 
 int main()
 {
     using namespace std;
-    
-    
+
+#ifdef ARRAYS
     int size;
     cout << "Enter size: "; cin >> size;
     int *array = new int[size];
-    
+
     FillRand(array, size);
     Print(array, size);
-    
+
 //    int value;
 //    cout << "Enter value: "; cin >> value;
 //
     int index;
+    cout << "Enter index: ";
+    std::cout << std::endl;
+    
+    cin >> index;
+
+    cout << endl;
+    array = erase(array, size, index);
+
+    Print(array, size);
+
+
+    delete [] array;
+    
+#endif
+#ifdef MATRIX
+
+    int rows;
+    cout << "Rows: "; cin >> rows;
+    int cols;
+    cout << "Columns: "; cin >> cols;
+
+    int** matrix = allocate(rows, cols);
+    
+    FillRand(matrix, rows, cols);
+    Print(matrix, rows, cols);
+    
+    cout << endl;
+    
+    int index;
     cout << "Enter index: "; cin >> index;
     
     cout << endl;
-    erase(array, size, index);
-    Print(array, size);
+    
+//    matrix = insert_rows(matrix, rows, cols, index);
+//    Print(matrix, rows, cols);
+    
+    cout << endl;
+    
+    matrix = erase_row(matrix, rows, cols, index);
+    Print(matrix, rows, cols);
+    
+    cout << endl;
+    
+    push_col_back(matrix, rows, cols);
+    Print(matrix, rows, cols);
+    
+    cout << endl;
+    
+    pop_col_back(matrix, rows, cols);
+    Print(matrix, rows, cols);
 
-    
-    delete [] array;
-    
-    
+    clear(matrix, rows);
+
+
+
+#endif
+
+
     return 0;
 }
+int** allocate(const int rows, const int cols)
+{
+    int** matrix = new int*[rows]{};
+    for (int i = 0; i < rows; ++i)
+    {
+        matrix[i] = new int[cols]{};
+    }
+    return matrix;
+}
 
+void clear(int** matrix, const int rows)
+{
+    for (int i = 0; i < rows; ++i)
+    {
+        delete[] matrix [i];
+    }
+    delete [] matrix;
+}
+
+int** push_row_back(int** matrix, int rows, int& cols)
+{
+    int** buffer = new int*[rows + 1];
+    
+    for (int i = 0; i < rows; ++i)
+    {
+        buffer[i] = matrix[i];
+    }
+    delete [] matrix;
+    
+    matrix = buffer;
+    
+    matrix[rows] = new int[cols]{};
+    
+    rows++;
+    
+    return matrix;
+    
+}
+
+int** push_row_front(int** matrix, int& rows, int cols)
+{
+    int** buffer = new int*[rows + 1]{};
+    
+    for (int i = 0; i < rows; ++i)
+    {
+        buffer[i + 1] = matrix[i];
+    }
+    
+    delete [] matrix;
+    
+    matrix = buffer;
+    
+    matrix[0] = new int[cols]{};
+    
+    rows ++;
+    
+    return matrix;
+}
+
+
+int** insert_rows(int** matrix, int& rows, int cols, int index)
+{
+    int** buffer = new int*[rows + 1]{};
+    for (int i = 0; i < index; ++i)
+    {
+        buffer[i] = matrix[i];
+    }
+    buffer[index] = new int[cols]{};
+    
+    for (int i = index; i < rows; ++i)
+    {
+        buffer[i + 1] = matrix[i];
+    }
+    delete[] matrix;
+    
+    matrix = buffer;
+    
+    rows++;
+    
+    return matrix;
+}
+
+int** pop_row_back(int** matrix, int& rows, int cols)
+{
+    rows --;
+    int** buffer = new int*[rows - 1]{};
+    for(int i = 0; i < rows; ++i)
+    {
+        buffer[i] = matrix[i];
+    }
+    delete [] matrix;
+    
+    matrix = buffer;
+    
+    return matrix;
+}
+
+int** pop_row_front(int** matrix, int& rows, int cols)
+{
+    rows --;
+    int** buffer = new int*[rows - 1]{};
+    for (int i = 0; i < rows; ++i)
+    {
+        buffer[i] = matrix[i + 1];
+    }
+    delete [] matrix;
+    matrix = buffer;
+    return matrix;
+}
+
+int** erase_row(int** matrix, int& rows, int cols, int index)
+{
+    int** buffer = new int*[rows - 1]{};
+    for (int i = 0; i < index; ++i)
+    {
+        buffer[i] = matrix[i];
+    }
+    for (int i = index; i < rows; ++i)
+    {
+        buffer[i - 1] = matrix[i];
+    }
+    
+    delete [] matrix;
+    
+    matrix = buffer;
+    
+    rows --;
+    
+    return matrix;
+}
+void push_col_back(int** matrix, int rows, int& cols)
+{
+    for (int i = 0; i < rows; ++i)
+    {
+        int* buffer = new int[cols + 1]{};
+        for (int j = 0; j < cols; ++j)
+        {
+            buffer[j] = matrix[i][j];
+        }
+        delete[] matrix[i];
+        matrix[i] = buffer;
+    }
+    cols ++;
+}
+
+void pop_col_back(int** matrix, int rows, int& cols)
+{
+    for (int i = 0; i < rows; ++i)
+    {
+        int* buffer = new int[cols - 1]{};
+        for (int j = 0; j < cols - 1; ++j)
+        {
+            buffer[j] = matrix[i][j];
+        }
+        
+        delete [] matrix[i];
+        
+        matrix[i] = buffer;
+    } 
+    cols --;
+}
 void FillRand(int* array, const int size)
 {
     for(int i = 0; i < size; ++i)
@@ -57,20 +285,20 @@ void Print(int* array, const int size)
 void Push_back(int*& array, int& size, int value)
 {
     int* buffer = new int[size + 1]{};
-    
+
     for (int i = 0; i < size; ++i)
     {
         buffer[i] = array[i];
     }
-    
+
     delete [] array;
-    
+
     array = buffer;
-    
+
     array[size] = value;
-    
+
     size ++;
-    
+
 }
 
 void Push_front(int*& array, int& size, int value)
@@ -81,13 +309,13 @@ void Push_front(int*& array, int& size, int value)
         buffer[i + 1] = array[i];
     }
     delete [] array;
-    
+
     array = buffer;
-    
+
     array[0] = value;
-    
+
     size ++;
-    
+
 }
 
 void insert(int*& array, int& size, int value, int index)
@@ -97,16 +325,16 @@ void insert(int*& array, int& size, int value, int index)
     {
         buffer[i] = array[i];
     }
-    
+
     buffer[index] = value;
-    
+
     for (int i = index; i < size; ++i) {
         buffer[i + 1] = array[i];
     }
     delete [] array;
-    
+
     array = buffer;
-    
+
     size ++;
 }
 
@@ -119,9 +347,10 @@ void pop_back(int*& array, int& size)
         buffer[i] = array[i];
     }
     delete[] array;
-    
+
     array = buffer;
 }
+
 void pop_front(int*& array, int& size)
 {
     size --;
@@ -132,25 +361,52 @@ void pop_front(int*& array, int& size)
     }
     delete[] array;
     array = buffer;
-    
+
 }
 
-void erase(int*& array, int& size, int index)
+int* erase(int* array, int& size, int index)
 {
     int* buffer = new int [size];
     for (int i = 0; i < index; ++i)
     {
         buffer[i] = array[i];
     }
-    
+
     for (int i = index; i < size; ++i)
     {
-        buffer[i - 1] = array[i];
+        buffer[i - 1]  = array[i];
     }
     delete [] array;
-    
+
     size--;
-    
+
     array = buffer;
-    
+
+    return array;
+
 }
+void FillRand(int** matrix, const int rows, const int cols)
+{
+    for (int i = 0; i < rows; ++i)
+    {
+        for (int j = 0; j < cols; ++j)
+        {
+            matrix[i][j] = rand() % 100;
+        }
+    }
+}
+
+void Print(int** matrix, const int rows, const int cols)
+{
+    for (int i = 0; i < rows; ++i)
+    {
+        for (int j = 0; j < cols; ++j)
+        {
+            std::cout << matrix[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+}
+
+
+
