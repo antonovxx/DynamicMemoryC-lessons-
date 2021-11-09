@@ -2,8 +2,9 @@
 //#define ARRAYS
 #define MATRIX
 
-int** allocate(const int rows, const int cols);
-void clear(int** matrix, const int rows);
+template <typename T> int** allocate(const T rows, const T cols);
+
+template <typename T> void clear(int** matrix, const T rows);
 
 void FillRand(int* array, const int size);
 void FillRand(int** matrix, const int rows, const int cols);
@@ -18,21 +19,21 @@ void pop_back(int*& array, int& size);
 void pop_front(int*& array, int& size);
 int* erase(int* array, int& size, int index);
 
-int** push_row_back(int** matrix, int& rows, int cols);
-int** push_row_front(int** matrix, int& rows, int cols);
-int** insert_rows(int** matrix, int& rows, int cols, int index);
+template <typename T> T** push_row_back(T** matrix, T& rows, T cols);
+template <typename T> T** push_row_front(T** matrix, T& rows, T cols);
+template <typename T> T** insert_rows(T** matrix, T& rows, T cols, T index);
 
-int** pop_row_back(int** matrix, int& rows, int cols);
-int** pop_row_front(int** matrix, int& rows, int cols);
-int** erase_row(int** matrix, int& rows, int cols, int index);
+template <typename T> T** pop_row_back(T** matrix, T& rows, T cols);
+template <typename T> T** pop_row_front(T** matrix, T& rows, T cols);
+template <typename T> T** erase_row(T** matrix, T& rows, T cols, T index);
 
-void push_col_back(int** matrix, int rows, int& cols);
-void push_col_front(int** matrix, int rows, int& cols);
-void insert_col(int** matrix, int rows, int& cols, int index = 2);
+template <typename T> void push_col_back(T** matrix, T rows, T& cols);
+template <typename T> void push_col_front(T** matrix, T rows, T& cols);
+template <typename T> void insert_col(T** matrix, T rows, T& cols, T index = 2);
 
-void pop_col_back(int** matrix, int rows, int& cols);
-void pop_col_front(int** matrix, int rows, int& cols);
-void erase_col(int** matrix, int rows, int& cols, int index = 1);
+template <typename T> void pop_col_back(T** matrix, T rows, T& cols);
+template <typename T> void pop_col_front(T** matrix, T rows, T& cols);
+template <typename T> void erase_col(T** matrix, T rows, T& cols, T index = 1);
 
 
 
@@ -80,15 +81,15 @@ int main()
     FillRand(matrix, rows, cols);
     Print(matrix, rows, cols);
     
-//    cout << endl;
+    cout << endl;
     
-//    int index;
-//    cout << "\nEnter index: "; cin >> index;
-//
-//    cout << endl;
+    int index;
+    cout << "\nEnter index: "; cin >> index;
+
+    cout << endl;
 //
 //    cout << "\nInsert row: " << endl;
-//    matrix = insert_rows(matrix, rows, cols, index);
+//    matrix = push_row_back(matrix, rows, cols);
 //    Print(matrix, rows, cols);
 //
 //    cout << "\nErase row: "<< endl;
@@ -96,13 +97,13 @@ int main()
 //    matrix = erase_row(matrix, rows, cols, index);
 //    Print(matrix, rows, cols);
     
-    cout << endl;
+//    cout << endl;
     
 //    insert_col(matrix, rows, cols);
 //    Print(matrix, rows, cols);
     
     cout << endl;
-   
+
     erase_col(matrix, rows, cols);
     Print(matrix, rows, cols);
 
@@ -115,8 +116,8 @@ int main()
 
     return 0;
 }
-
-int** allocate(const int rows, const int cols)
+template <typename T>
+int** allocate(const T rows, const T cols)
 {
     int** matrix = new int*[rows]{};
     for (int i = 0; i < rows; ++i)
@@ -126,7 +127,8 @@ int** allocate(const int rows, const int cols)
     return matrix; // возвращаем адрес массива на место вызова функции
 }
 
-void clear(int** matrix, const int rows)
+template <typename T>
+void clear(int** matrix, const T rows)
 {
     for (int i = 0; i < rows; ++i)
     {
@@ -135,7 +137,8 @@ void clear(int** matrix, const int rows)
     delete [] matrix;
 }
 
-int** push_row_back(int** matrix, int rows, int& cols)
+
+template <typename T> T** push_row_back(T** matrix, T& rows, T cols)
 {
     int** buffer = new int*[rows + 1];
     
@@ -155,7 +158,7 @@ int** push_row_back(int** matrix, int rows, int& cols)
     
 }
 
-int** push_row_front(int** matrix, int& rows, int cols)
+template <typename T> T** push_row_front(T** matrix, T& rows, T cols)
 {
     int** buffer = new int*[rows + 1]{};
     
@@ -176,7 +179,7 @@ int** push_row_front(int** matrix, int& rows, int cols)
 }
 
 
-int** insert_rows(int** matrix, int& rows, int cols, int index)
+template <typename T> T** insert_rows(T** matrix, T& rows, T cols, T index)
 {
     int** buffer = new int*[rows + 1]{};
     for (int i = 0; i < index; ++i)
@@ -198,7 +201,7 @@ int** insert_rows(int** matrix, int& rows, int cols, int index)
     return matrix;
 }
 
-int** pop_row_back(int** matrix, int& rows, int cols)
+template <typename T> T** pop_row_back(T** matrix, T& rows, T cols)
 {
     rows --;
     int** buffer = new int*[rows - 1]{};
@@ -213,7 +216,7 @@ int** pop_row_back(int** matrix, int& rows, int cols)
     return matrix;
 }
 
-int** pop_row_front(int** matrix, int& rows, int cols)
+template <typename T> T** pop_row_front(T** matrix, T& rows, T cols)
 {
     rows --;
     int** buffer = new int*[rows - 1]{};
@@ -226,7 +229,7 @@ int** pop_row_front(int** matrix, int& rows, int cols)
     return matrix;
 }
 
-int** erase_row(int** matrix, int& rows, int cols, int index)
+template <typename T> T** erase_row(T** matrix, T& rows, T cols, T index)
 {
     int** buffer = new int*[rows - 1]{};
     for (int i = 0; i < index; ++i)
@@ -247,7 +250,7 @@ int** erase_row(int** matrix, int& rows, int cols, int index)
     return matrix;
 }
 
-void push_col_back(int** matrix, int rows, int& cols)
+template <typename T> void push_col_back(T** matrix, T rows, T& cols)
 {
     for (int i = 0; i < rows; ++i)
     {
@@ -262,7 +265,7 @@ void push_col_back(int** matrix, int rows, int& cols)
     cols ++;
 }
 
-void push_col_front(int** matrix, int rows, int& cols) // добавление в начало
+template <typename T> void push_col_front(T** matrix, T rows, T& cols) // добавление в начало
 {
     for (int i = 0; i < rows; ++i)
     {
@@ -281,7 +284,7 @@ void push_col_front(int** matrix, int rows, int& cols) // добавление �
     cols ++;
 }
 
-void insert_col(int** matrix, int rows, int& cols, int index)
+template <typename T> void insert_col(T** matrix, T rows, T& cols, T index)
 {
     for (int i = 0; i < rows; ++i)
     {
@@ -303,7 +306,7 @@ void insert_col(int** matrix, int rows, int& cols, int index)
     cols ++;
 }
 
-void pop_col_back(int** matrix, int rows, int& cols)
+template <typename T> void pop_col_back(T** matrix, T rows, T& cols)
 {
     for (int i = 0; i < rows; ++i)
     {
@@ -320,7 +323,7 @@ void pop_col_back(int** matrix, int rows, int& cols)
     cols --;
 }
 
-void pop_col_front(int** matrix, int rows, int& cols)
+template <typename T> void pop_col_front(T** matrix, T rows, T& cols)
 {
     for (int i = 0; i < rows; ++i)
     {
@@ -337,7 +340,7 @@ void pop_col_front(int** matrix, int rows, int& cols)
     cols --;
 }
 
-void erase_col(int** matrix, int rows, int& cols, int index)
+template <typename T> void erase_col(T** matrix, T rows, T& cols, T index)
 {
     for (int i = 0; i < rows; ++i)
     {
