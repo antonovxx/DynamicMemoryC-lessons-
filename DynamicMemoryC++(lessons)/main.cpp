@@ -2,12 +2,12 @@
 //#define ARRAYS
 #define MATRIX
 
-template <typename T> int** allocate(const T rows, const T cols);
+template <typename T> T** allocate(const T rows, const T cols);
 
-template <typename T> void clear(int** matrix, const T rows);
+template <typename T> void clear(T** matrix, const T rows);
 
 void FillRand(int* array, const int size);
-void FillRand(int** matrix, const int rows, const int cols);
+template <typename T> void FillRand(T** matrix, const T rows, const T cols);
 
 void Print(int* array, const int size);
 void Print(int** matrix, const int rows, const int cols);
@@ -116,19 +116,17 @@ int main()
 
     return 0;
 }
-template <typename T>
-int** allocate(const T rows, const T cols)
+template <typename T> T** allocate(const T rows, const T cols)
 {
-    int** matrix = new int*[rows]{};
+    T** matrix = new T*[rows]{};
     for (int i = 0; i < rows; ++i)
     {
-        matrix[i] = new int[cols]{};
+        matrix[i] = new T[cols]{};
     }
     return matrix; // возвращаем адрес массива на место вызова функции
 }
 
-template <typename T>
-void clear(int** matrix, const T rows)
+template <typename T> void clear(T** matrix, const T rows)
 {
     for (int i = 0; i < rows; ++i)
     {
@@ -140,7 +138,7 @@ void clear(int** matrix, const T rows)
 
 template <typename T> T** push_row_back(T** matrix, T& rows, T cols)
 {
-    int** buffer = new int*[rows + 1];
+    T** buffer = new T*[rows + 1];
     
     for (int i = 0; i < rows; ++i)
     {
@@ -150,7 +148,7 @@ template <typename T> T** push_row_back(T** matrix, T& rows, T cols)
     
     matrix = buffer;
     
-    matrix[rows] = new int[cols]{};
+    matrix[rows] = new T[cols]{};
     
     rows++;
     
@@ -231,7 +229,7 @@ template <typename T> T** pop_row_front(T** matrix, T& rows, T cols)
 
 template <typename T> T** erase_row(T** matrix, T& rows, T cols, T index)
 {
-    int** buffer = new int*[rows - 1]{};
+    T** buffer = new T*[rows - 1]{};
     for (int i = 0; i < index; ++i)
     {
         buffer[i] = matrix[i];
@@ -479,7 +477,7 @@ int* erase(int* array, int& size, int index)
     return array;
 
 }
-void FillRand(int** matrix, const int rows, const int cols)
+template <typename T> void FillRand(T** matrix, const T rows, const T cols)
 {
     for (int i = 0; i < rows; ++i)
     {
