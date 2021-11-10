@@ -158,7 +158,7 @@ template <typename T> T** push_row_back(T** matrix, T& rows, T cols)
 
 template <typename T> T** push_row_front(T** matrix, T& rows, T cols)
 {
-    int** buffer = new int*[rows + 1]{};
+    T** buffer = new T*[rows + 1]{};
     
     for (int i = 0; i < rows; ++i)
     {
@@ -169,7 +169,7 @@ template <typename T> T** push_row_front(T** matrix, T& rows, T cols)
     
     matrix = buffer;
     
-    matrix[0] = new int[cols]{};
+    matrix[0] = new T[cols]{};
     
     rows ++;
     
@@ -179,12 +179,12 @@ template <typename T> T** push_row_front(T** matrix, T& rows, T cols)
 
 template <typename T> T** insert_rows(T** matrix, T& rows, T cols, T index)
 {
-    int** buffer = new int*[rows + 1]{};
+    T** buffer = new T*[rows + 1]{};
     for (int i = 0; i < index; ++i)
     {
         buffer[i] = matrix[i];
     }
-    buffer[index] = new int[cols]{};
+    buffer[index] = new T[cols]{};
     
     for (int i = index; i < rows; ++i)
     {
@@ -202,7 +202,7 @@ template <typename T> T** insert_rows(T** matrix, T& rows, T cols, T index)
 template <typename T> T** pop_row_back(T** matrix, T& rows, T cols)
 {
     rows --;
-    int** buffer = new int*[rows - 1]{};
+    T** buffer = new T*[rows - 1]{};
     for(int i = 0; i < rows; ++i)
     {
         buffer[i] = matrix[i];
@@ -217,7 +217,7 @@ template <typename T> T** pop_row_back(T** matrix, T& rows, T cols)
 template <typename T> T** pop_row_front(T** matrix, T& rows, T cols)
 {
     rows --;
-    int** buffer = new int*[rows - 1]{};
+    T** buffer = new T*[rows - 1]{};
     for (int i = 0; i < rows; ++i)
     {
         buffer[i] = matrix[i + 1];
@@ -252,7 +252,7 @@ template <typename T> void push_col_back(T** matrix, T rows, T& cols)
 {
     for (int i = 0; i < rows; ++i)
     {
-        int* buffer = new int[cols + 1]{};
+        T* buffer = new T[cols + 1]{};
         for (int j = 0; j < cols; ++j)
         {
             buffer[j] = matrix[i][j];
@@ -267,7 +267,7 @@ template <typename T> void push_col_front(T** matrix, T rows, T& cols) // доб
 {
     for (int i = 0; i < rows; ++i)
     {
-        int* buffer = new int[cols + 1]{};
+        T* buffer = new T[cols + 1]{};
         for (int j = 0; j < cols; ++j)
         {
             if(j == 0)
@@ -286,7 +286,7 @@ template <typename T> void insert_col(T** matrix, T rows, T& cols, T index)
 {
     for (int i = 0; i < rows; ++i)
     {
-        int* buffer = new int[cols + 1]{};
+        T* buffer = new T[cols + 1]{};
         int currentCol = 0;
         for (int j = 0; j < cols; ++j)
         {
@@ -308,7 +308,7 @@ template <typename T> void pop_col_back(T** matrix, T rows, T& cols)
 {
     for (int i = 0; i < rows; ++i)
     {
-        int* buffer = new int[cols - 1]{};
+        T* buffer = new T[cols - 1]{};
         for (int j = 0; j < cols - 1; ++j)
         {
             buffer[j] = matrix[i][j];
@@ -325,7 +325,7 @@ template <typename T> void pop_col_front(T** matrix, T rows, T& cols)
 {
     for (int i = 0; i < rows; ++i)
     {
-        int* buffer = new int[cols - 1]{};
+        T* buffer = new T[cols - 1]{};
         for (int j = 0; j < cols; ++j)
         {
             buffer[j] = matrix[i][j + 1];
@@ -342,7 +342,7 @@ template <typename T> void erase_col(T** matrix, T rows, T& cols, T index)
 {
     for (int i = 0; i < rows; ++i)
     {
-        int* buffer = new int[cols - 1]{};
+        T* buffer = new T[cols - 1]{};
         int currentCol = 0;
         for (int j = 0; j < cols; ++j)
         {
