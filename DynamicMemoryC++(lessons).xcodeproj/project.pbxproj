@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A80C3612743BCE1006E9831 /* Fillrand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A80C3602743BCE1006E9831 /* Fillrand.cpp */; };
+		0A80C3652743BE53006E9831 /* Print.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A80C3632743BE53006E9831 /* Print.cpp */; };
+		0A80C3682743BF19006E9831 /* ArraysOperations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A80C3662743BF19006E9831 /* ArraysOperations.cpp */; };
+		0A80C36B2743C1B6006E9831 /* MatrixOperations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A80C3692743C1B6006E9831 /* MatrixOperations.cpp */; };
 		0A8EB0802731EF6C003731D1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A8EB07F2731EF6C003731D1 /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +27,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0A80C35F2743BC88006E9831 /* Fillrand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Fillrand.h; sourceTree = "<group>"; };
+		0A80C3602743BCE1006E9831 /* Fillrand.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Fillrand.cpp; sourceTree = "<group>"; };
+		0A80C3622743BD5F006E9831 /* stdafx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stdafx.h; sourceTree = "<group>"; };
+		0A80C3632743BE53006E9831 /* Print.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Print.cpp; sourceTree = "<group>"; };
+		0A80C3642743BE53006E9831 /* Print.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Print.hpp; sourceTree = "<group>"; };
+		0A80C3662743BF19006E9831 /* ArraysOperations.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ArraysOperations.cpp; sourceTree = "<group>"; };
+		0A80C3672743BF19006E9831 /* ArraysOperations.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ArraysOperations.hpp; sourceTree = "<group>"; };
+		0A80C3692743C1B6006E9831 /* MatrixOperations.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MatrixOperations.cpp; sourceTree = "<group>"; };
+		0A80C36A2743C1B6006E9831 /* MatrixOperations.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MatrixOperations.hpp; sourceTree = "<group>"; };
 		0A8EB07C2731EF6C003731D1 /* DynamicMemoryC++(lessons) */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "DynamicMemoryC++(lessons)"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A8EB07F2731EF6C003731D1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,6 +71,15 @@
 			isa = PBXGroup;
 			children = (
 				0A8EB07F2731EF6C003731D1 /* main.cpp */,
+				0A80C3622743BD5F006E9831 /* stdafx.h */,
+				0A80C3602743BCE1006E9831 /* Fillrand.cpp */,
+				0A80C35F2743BC88006E9831 /* Fillrand.h */,
+				0A80C3632743BE53006E9831 /* Print.cpp */,
+				0A80C3642743BE53006E9831 /* Print.hpp */,
+				0A80C3662743BF19006E9831 /* ArraysOperations.cpp */,
+				0A80C3672743BF19006E9831 /* ArraysOperations.hpp */,
+				0A80C3692743C1B6006E9831 /* MatrixOperations.cpp */,
+				0A80C36A2743C1B6006E9831 /* MatrixOperations.hpp */,
 			);
 			path = "DynamicMemoryC++(lessons)";
 			sourceTree = "<group>";
@@ -119,7 +141,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A80C36B2743C1B6006E9831 /* MatrixOperations.cpp in Sources */,
+				0A80C3652743BE53006E9831 /* Print.cpp in Sources */,
 				0A8EB0802731EF6C003731D1 /* main.cpp in Sources */,
+				0A80C3612743BCE1006E9831 /* Fillrand.cpp in Sources */,
+				0A80C3682743BF19006E9831 /* ArraysOperations.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
